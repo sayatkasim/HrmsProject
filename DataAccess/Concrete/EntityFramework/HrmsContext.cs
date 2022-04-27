@@ -18,7 +18,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<JobList> JobLists { get; set; }
         public DbSet<Employer> Employers { get; set; }
-        public DbSet<PanelStaff> PanelStaffs { get; set; }
         public DbSet<User> Users { get; set; }
         
     }

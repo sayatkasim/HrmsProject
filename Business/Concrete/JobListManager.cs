@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Utilities.Business;
+using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Business.Concrete
 {
@@ -27,9 +29,17 @@ namespace Business.Concrete
         [ValidationAspect(typeof(JobListValidator))]
         public IResult Add(JobList jobList)
         {
-           
-            _jobListDal.Add(jobList);
-            return new SuccessResult(Messages.JobListAdded);
+           IResult result = BusinessRules.Run(
+                CheckIfJobNameExists(jobList.JobListName));
+
+           if (result != null)
+           {
+               return result;
+           }
+            
+           _jobListDal.Add(jobList);
+           return new SuccessResult(Messages.JobListAdded);
+
         }
 
         public IResult Delete(JobList jobList)
@@ -57,6 +67,17 @@ namespace Business.Concrete
         public IResult Update(JobList jobList)
         {
             _jobListDal.Update(jobList);
+            return new SuccessResult();
+        }
+
+       private IResult CheckIfJobNameExists(string jobListname)
+        {
+            var result = _jobListDal.GetAll(j => j.JobListName == jobListname).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.JobListAllreadyExists);
+            }
+
             return new SuccessResult();
         }
     }

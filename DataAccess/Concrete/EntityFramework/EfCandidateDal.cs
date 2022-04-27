@@ -21,8 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
                              join u in context.Users
                              on c.CandidateId equals u.UserId
                              select new CandidateDetailDto { CandidateId = c.CandidateId,FirstName = c.FirstName,
-                             LastName = c.LastName, DateOfBirth = c.DateOfBirth, IdentityNumber = c.IdentityNumber,
-                             Email = u.Email, Password = u.Password, UserId = u.UserId};
+                             LastName = c.LastName, DateOfBirth = c.DateOfBirth, IdentityNumber = c.IdentityNumber};
                 return result.ToList();
             }
         }

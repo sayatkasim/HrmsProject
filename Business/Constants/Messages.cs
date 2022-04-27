@@ -15,5 +15,6 @@ namespace Business.Constants
         public static string CandidateListed = "Adaylar Listelendi";
         public static string CandidateAdded = "Aday Sisteme Eklendi";
         public static string CandidateDeleted = "Aday Sistemden Çıkarıldı";
+        public static string JobListAllreadyExists = "Meslek Sistemde Mevcut";
     }
 }

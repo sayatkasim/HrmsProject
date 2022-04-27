@@ -12,10 +12,6 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterMod
 
 // Add services to the container.
 builder.Services.AddControllers();
-//builder.Services.AddSingleton<IJobListService,JobListManager>();
-//builder.Services.AddSingleton<IJobListDal, EfJobListDal>();
-//builder.Services.AddSingleton<ICandidateService, CandidateManager>();
-//builder.Services.AddSingleton<ICandidateDal, EfCandidateDal>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

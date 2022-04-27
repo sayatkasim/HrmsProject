@@ -20,6 +20,7 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<JobListManager>().As<IJobListService>().SingleInstance();
             builder.RegisterType<EfJobListDal>().As<IJobListDal>().SingleInstance();
+
             builder.RegisterType<CandidateManager>().As<ICandidateService>().SingleInstance();
             builder.RegisterType<EfCandidateDal>().As<ICandidateDal>().SingleInstance();
 
