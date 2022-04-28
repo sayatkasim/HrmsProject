@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.Concrete;
 
 namespace Business.Constants
 {
@@ -16,5 +17,12 @@ namespace Business.Constants
         public static string CandidateAdded = "Aday Sisteme Eklendi";
         public static string CandidateDeleted = "Aday Sistemden Çıkarıldı";
         public static string JobListAllreadyExists = "Meslek Sistemde Mevcut";
+        public static string AuthorizationDenied = "İşlem Yapmaya Yetkiniz Yok";
+        public static string UserRegistered = "Kullanıcı Kayıt Oldu";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Paralo Hatalı";
+        public static string SuccessfulLogin = "Giriş Başarılı";
+        public static string UserAlreadyExists = "Kullanıcı Mevcut";
+        public static string AccessTokenCreated = "Token Oluşturuldu";
     }
 }

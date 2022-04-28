@@ -26,6 +26,8 @@ namespace Business.Concrete
             _jobListDal = jobListDal;
         }
 
+        
+        //[SecuredOperation("joblist.add")]
         [ValidationAspect(typeof(JobListValidator))]
         public IResult Add(JobList jobList)
         {

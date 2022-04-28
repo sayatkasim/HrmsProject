@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCandidateDal : ICandidateDal
+    public class InMemoryCandidateDal 
     {
         List<Candidate> _candidates;
         public InMemoryCandidateDal()
@@ -23,8 +23,6 @@ namespace DataAccess.Concrete.InMemory
                 FirstName = "Sayat",
                 LastName ="Kasım",
                 IdentityNumber="12345678910",
-                Email="sayat@sayat.com",
-                Password="123456"
                 
             }
          
@@ -59,11 +57,6 @@ namespace DataAccess.Concrete.InMemory
         public List<Candidate> GetAllByFirstName(string firstName)
         {
             return _candidates.Where(c => c.FirstName == firstName).ToList();
-        }
-
-        public List<CandidateDetailDto> GetJobListDetails()
-        {
-            throw new NotImplementedException();
         }
 
         public void Update(Candidate candidate)

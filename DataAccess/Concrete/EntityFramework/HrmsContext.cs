@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -17,8 +18,9 @@ namespace DataAccess.Concrete.EntityFramework
 
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<JobList> JobLists { get; set; }
-        public DbSet<Employer> Employers { get; set; }
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
     }
 }
