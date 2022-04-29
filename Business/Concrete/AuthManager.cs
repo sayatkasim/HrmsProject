@@ -41,6 +41,14 @@ namespace Business.Concrete
             _userService.Add(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
+        public IResult UserExists(string email)
+        {
+            if (_userService.GetByMail(email) != null)
+            {
+                return new ErrorResult(Messages.UserAlreadyExists);
+            }
+            return new SuccessResult();
+        }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
@@ -56,15 +64,6 @@ namespace Business.Concrete
             }
 
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
-        }
-
-        public IResult UserExists(string email)
-        {
-            if (_userService.GetByMail(email) != null)
-            {
-                return new ErrorResult(Messages.UserAlreadyExists);
-            }
-            return new SuccessResult();
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)

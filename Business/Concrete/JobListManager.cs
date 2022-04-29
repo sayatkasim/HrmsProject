@@ -12,6 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofact.Caching;
+using Core.Aspects.Autofact.Perofrmance;
+using Core.Aspects.Autofact.Transaction;
 using Core.Utilities.Business;
 using Microsoft.AspNetCore.Components.RenderTree;
 
@@ -27,8 +31,9 @@ namespace Business.Concrete
         }
 
         
-        //[SecuredOperation("joblist.add")]
+        [SecuredOperation("joblist.add,admin")]
         [ValidationAspect(typeof(JobListValidator))]
+        [CacheRemoveAspect("IJobListService.Get")]
         public IResult Add(JobList jobList)
         {
            IResult result = BusinessRules.Run(
@@ -44,12 +49,15 @@ namespace Business.Concrete
 
         }
 
+        [CacheRemoveAspect("IJobListService.Get")]
         public IResult Delete(JobList jobList)
         {
             _jobListDal.Delete(jobList);
             return new SuccessResult();
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<JobList>> GetAll()
         {
 
@@ -65,14 +73,30 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<JobList>>(_jobListDal.GetAll(j => j.JobListName == jobListName), Messages.JobListListed);
         }
-
+        
+        [ValidationAspect(typeof(JobListValidator))]
+        [CacheRemoveAspect("IJobListService.Get")]
         public IResult Update(JobList jobList)
         {
             _jobListDal.Update(jobList);
             return new SuccessResult();
         }
 
-       private IResult CheckIfJobNameExists(string jobListname)
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(JobList jobList)
+        {
+            
+            Add(jobList);
+            if (jobList.JobListName == "Deneme")
+            {
+                throw new Exception("");
+            }
+
+            Add(jobList);
+            return null;
+        }
+
+        private IResult CheckIfJobNameExists(string jobListname)
         {
             var result = _jobListDal.GetAll(j => j.JobListName == jobListname).Any();
             if (result)

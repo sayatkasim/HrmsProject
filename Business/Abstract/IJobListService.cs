@@ -16,6 +16,7 @@ namespace Business.Abstract
         IResult Add(JobList jobList);
         IResult Delete(JobList jobList);
         IResult Update(JobList jobList);
+        IResult AddTransactionalTest(JobList jobList);
 
     }
 }
